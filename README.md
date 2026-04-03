@@ -213,7 +213,7 @@ nixos-thinkpad-e485/
 | Multimedia | VLC, Krita |
 | Files | Krusader, Ark + ZIP/7z/RAR backends |
 | Communication | Discord |
-| System | btop, htop, nmap, wget, curl, openssh |
+| System | btop, htop, nmap, wget, curl, openssh, fastfetch |
 | Shell | zsh, oh-my-zsh, autosuggestions, syntax highlighting |
 
 ---
