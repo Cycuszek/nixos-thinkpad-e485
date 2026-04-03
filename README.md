@@ -228,8 +228,6 @@ On your installed NixOS system, open a terminal and run:
 # Install git if not already available
 nix-shell -p git
 
-# If Offline go to **Step 3** 
-
 # Files correct structure:
 # 
 # flake.nix
