@@ -228,11 +228,10 @@ On your installed NixOS system, open a terminal and run:
 # Install git if not already available
 nix-shell -p git
 
-# If repo are downloaded, add all files to:
-mkdir ~/nixos-thinkpad-e485 && cd ~/nixos-thinkpad-e485
+# If Offline go to **Step 3** 
 
-# Files the correct structure:
-# s
+# Files correct structure:
+# 
 # flake.nix
 # hosts/e485/default.nix
 # hosts/e485/hardware.nix
