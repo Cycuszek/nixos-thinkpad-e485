@@ -255,13 +255,15 @@ sudo nixos-rebuild switch
 
 ### Step 3 — Rebuild from GitHub
 
-Directly from the remote repo (no clone needed):
+Directly from the remote repo (no clone needed - but u need flag, and lock is not used!):
+
+
 
 ```bash
-sudo nixos-rebuild switch --flake github:Cycuszek/nixos-thinkpad-e485#e485
+sudo nixos-rebuild switch --flake github:Cycuszek/nixos-thinkpad-e485#e485 --no-write-lock-file
 ```
 
-Or clone locally and rebuild (recommended — faster, works offline):
+Or clone locally and rebuild **(recommended — faster, works offline)**:
 
 ```bash
 git clone https://github.com/Cycuszek/nixos-thinkpad-e485.git ~/nixos-config
