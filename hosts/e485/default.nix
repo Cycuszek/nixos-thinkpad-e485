@@ -32,6 +32,7 @@
   # -------------------------------------------------------
   # Hardware — AMD GPU
   # -------------------------------------------------------
-  hardware.amdgpu.enable = true;
+  hardware.amdgpu.initrd.enable = true;    # load amdgpu in initrd
+  hardware.amdgpu.opencl.enable = true;    # OpenCL support
   hardware.enableRedistributableFirmware = true;
 }
