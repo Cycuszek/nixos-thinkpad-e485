@@ -208,7 +208,7 @@ nixos-thinkpad-e485/
 | Category | Packages |
 |---|---|
 | Browsers | Firefox ESR, Brave, Google Chrome |
-| Development | VSCodium, Neovim, Git |
+| Development | Vim, VSCodium, Neovim, Git |
 | Office | LibreOffice (Qt) |
 | Multimedia | VLC, Krita |
 | Files | Krusader, Ark + ZIP/7z/RAR backends |
