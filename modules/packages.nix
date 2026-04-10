@@ -33,6 +33,7 @@
     # File management
     # -------------------------------------------------------
     krusader         # dual-panel file manager (Total Commander alternative)
+    exiftool         # meta information (CLI)
 
     # Ark backends — required for full archive format support
     # ark itself is already included with KDE Plasma

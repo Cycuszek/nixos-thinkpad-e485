@@ -211,7 +211,7 @@ nixos-thinkpad-e485/
 | Development | Vim, VSCodium, Neovim, Git |
 | Office | LibreOffice (Qt) |
 | Multimedia | VLC, Krita |
-| Files | Krusader, Ark + ZIP/7z/RAR backends |
+| Files | Krusader, Exiftool (CLI), Ark + ZIP/7z/RAR backends |
 | Communication | Discord |
 | System | btop, htop, nmap, wget, curl, openssh, fastfetch |
 | Shell | zsh, oh-my-zsh, autosuggestions, syntax highlighting |
