@@ -40,7 +40,7 @@
   # Bluetooth - Realtek RTL8822B firmware quirk workaround
   # -------------------------------------------------------
   # Some RTL8822B/BE controllers only work after a suspend/resume
-  # due to a firmware download error during cold boot.[web:162][web:151]
+  # due to a firmware download error during cold boot.
   # This one-shot service suspends the system once after boot.
   # You wake the laptop (lid / power button) and Bluetooth works
   # for the rest of the session without manual suspend.
