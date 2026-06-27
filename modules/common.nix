@@ -32,12 +32,36 @@
   # Networking
   # -------------------------------------------------------
   networking.networkmanager.enable = true;
-  #
+
   # Bluetooth on KDE / for other DE  = bluemans
+  hardware.enableRedistributableFirmware = true;
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
+    settings = {
+      General = {
+        AutoEnable = true;
+      };
+    };
   };
+
+  boot.kernelModules = [ "btusb" ];
+
+  # Added custom fix with firmware RTL8822B/BE for BT on e485
+  hardware.firmware = [
+    (pkgs.runCommand "rtl8822b-local-fw" { } ''
+      mkdir -p $out/lib/firmware/rtlwifi
+      mkdir -p $out/lib/firmware/rtl_bt
+
+      # Wi-Fi firmware
+      cp ${./firmware/rtlwifi/rtl8822befw.bin} \
+         $out/lib/firmware/rtlwifi/rtl8822befw.bin
+
+      # Bluetooth firmware, change firmware fix for rtl8822b_fw.bin on e485
+      cp ${./firmware/rtl_bt/rtl8822b_fw.bin} \
+         $out/lib/firmware/rtl_bt/rtl8822b_fw.bin
+    '')
+  ];
 
   # -------------------------------------------------------
   # User
@@ -46,10 +70,7 @@
     isNormalUser = true;
     description  = "cyc";
     extraGroups  = [ "wheel" "networkmanager" "audio" "video" "docker" ];
-
-    # Set password on first boot with: passwd cyc
-    # Or uncomment and use hashed password (generate with: mkpasswd -m sha-512)
-    # hashedPassword = "$6$...";
+    # hashedPassword ...
   };
 
   # -------------------------------------------------------
