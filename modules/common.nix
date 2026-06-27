@@ -54,11 +54,11 @@
       mkdir -p $out/lib/firmware/rtl_bt
 
       # Wi-Fi firmware
-      cp ${./firmware/rtlwifi/rtl8822befw.bin} \
+      cp ${../firmware/rtlwifi/rtl8822befw.bin} \
          $out/lib/firmware/rtlwifi/rtl8822befw.bin
 
       # Bluetooth firmware, change firmware fix for rtl8822b_fw.bin on e485
-      cp ${./firmware/rtl_bt/rtl8822b_fw.bin} \
+      cp ${../firmware/rtl_bt/rtl8822b_fw.bin} \
          $out/lib/firmware/rtl_bt/rtl8822b_fw.bin
     '')
   ];
