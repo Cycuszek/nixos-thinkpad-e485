@@ -3,12 +3,12 @@
   networking.hostName = "e485";
 
   # -------------------------------------------------------
-  # Boot — Lenovo ThinkPad E485 specific fixes
+  # Boot - Lenovo ThinkPad E485 specific fixes
   # Required to fix silent hang after EFI stub initrd load
   # when installed via Ventoy
   # -------------------------------------------------------
   boot.initrd.availableKernelModules = [
-    "nvme"        # critical — NVMe root partition access
+    "nvme"        # critical - NVMe root partition access
     "xhci_pci"
     "ahci"
     "usb_storage"
@@ -19,8 +19,8 @@
   boot.initrd.kernelModules = [ "amdgpu" ];
 
   boot.kernelParams = [
-    "ivrs_ioapic[32]=00:14.0"       # IOAPIC mapping fix for AMD/Lenovo firmware
-    "spec_store_bypass_disable=prctl" # Spectre v4 mitigation — prctl mode (balanced)
+    "ivrs_ioapic[32]=00:14.0"          # IOAPIC mapping fix for AMD/Lenovo firmware
+    "spec_store_bypass_disable=prctl"  # Spectre v4 mitigation - prctl mode (balanced)
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -30,9 +30,31 @@
   boot.loader.systemd-boot.configurationLimit = 5;
 
   # -------------------------------------------------------
-  # Hardware — AMD GPU
+  # Hardware - AMD GPU & firmware
   # -------------------------------------------------------
   hardware.amdgpu.initrd.enable = true;    # load amdgpu in initrd
   hardware.amdgpu.opencl.enable = true;    # OpenCL support
-  hardware.enableRedistributableFirmware = true;
+  hardware.enableRedistributableFirmware = true; # allow non-free firmware blobs[web:90]
+
+  # -------------------------------------------------------
+  # Bluetooth - Realtek RTL8822B firmware quirk workaround
+  # -------------------------------------------------------
+  # Some RTL8822B/BE controllers only work after a suspend/resume
+  # due to a firmware download error during cold boot.
+  # This one-shot service resets the btusb module once after boot
+  # and tries to power on the controller to avoid manual sleep.
+  systemd.services.bt-reset = {
+    description = "Reset Bluetooth controller after boot (Realtek RTL8822B workaround)";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "bluetooth.service" ];
+
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = ''
+        ${pkgs.kmod}/bin/modprobe -r btusb
+        ${pkgs.kmod}/bin/modprobe btusb
+        ${pkgs.bluez}/bin/bluetoothctl --timeout 5 power on || true
+      '';
+    };
+  };
 }
