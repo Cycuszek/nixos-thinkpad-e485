@@ -40,21 +40,18 @@
   # Bluetooth - Realtek RTL8822B firmware quirk workaround
   # -------------------------------------------------------
   # Some RTL8822B/BE controllers only work after a suspend/resume
-  # due to a firmware download error during cold boot.
-  # This one-shot service resets the btusb module once after boot
-  # and tries to power on the controller to avoid manual sleep.
-  systemd.services.bt-reset = {
-    description = "Reset Bluetooth controller after boot (Realtek RTL8822B workaround)";
+  # due to a firmware download error during cold boot.[web:162][web:151]
+  # This one-shot service suspends the system once after boot.
+  # You wake the laptop (lid / power button) and Bluetooth works
+  # for the rest of the session without manual suspend.
+  systemd.services.auto-suspend-once = {
+    description = "Suspend once after boot (Realtek RTL8822B workaround)";
     wantedBy = [ "multi-user.target" ];
-    after = [ "bluetooth.service" ];
+    after = [ "multi-user.target" ];
 
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = ''
-        ${pkgs.kmod}/bin/modprobe -r btusb
-        ${pkgs.kmod}/bin/modprobe btusb
-        ${pkgs.bluez}/bin/bluetoothctl --timeout 5 power on || true
-      '';
+      ExecStart = "${pkgs.systemd}/bin/systemctl suspend";
     };
   };
 }
