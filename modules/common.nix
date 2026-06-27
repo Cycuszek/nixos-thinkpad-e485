@@ -32,6 +32,12 @@
   # Networking
   # -------------------------------------------------------
   networking.networkmanager.enable = true;
+  #
+  # Bluetooth on KDE / for other DE  = bluemans
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
 
   # -------------------------------------------------------
   # User
@@ -67,6 +73,7 @@
     alsa.enable       = true;
     alsa.support32Bit = true;
     pulse.enable      = true;
+    jack.enable       = true;
   };
 
   # -------------------------------------------------------
